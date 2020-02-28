@@ -43,6 +43,7 @@ function Provider({children}) {
         let currentTodos = [...state.todos];
         let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
         currentTodos[selectedIndex].isComplete = !currentTodos[selectedIndex].isComplete;
+        currentTodos[selectedIndex].isEdit = false;
         dispatch({
             type: "CHECK_HANDLER",
             payload: currentTodos

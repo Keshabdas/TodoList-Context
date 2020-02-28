@@ -17,7 +17,7 @@ function CompletedList() {
                 completedList.length == 0 || typeof(completedList) === undefined ? 
                  null : 
                 <>
-                    <Typography variant="h5" align="center" color='textSecondary'>
+                    <Typography variant="h5" align="center" style={{color: 'green'}}>
                         Completed ({completedList.length})
                     </Typography>
                     <List>

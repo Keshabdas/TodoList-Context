@@ -8,13 +8,13 @@ const myStyle = makeStyles({
     }
 })
 
-function Header() {
+function Header({text}) {
     const classes = myStyle();
     return (
         <Typography variant="h4" align="center" className={classes.root} color="primary" >
-          To Do List
+          {text}
         </Typography>
     )
 }
 
-export default Header
+export default Header;

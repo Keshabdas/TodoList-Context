@@ -11,12 +11,14 @@ function IncompletedList() {
         <>
             {
                 inCompleteList.length == 0 || typeof(inCompleteList) === undefined ? 
-                <Nodata text="No incomplete task available" /> :
+                // <Nodata text="No incomplete task available" /> 
+                null
+                :
                 <>
-                    <Typography variant="h5" align="center" color="error">
+                    <Typography variant="h5" align="center" color="error" style={{margin: "20px 0px 10px"}}>
                         Incomplete ({inCompleteList.length})
                     </Typography>
-                    <List>
+                    <List> 
                         {
                             inCompleteList.map((todo, index) => (
                                 <TodoItem key={index} todo={todo} index={index}  />
