@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React from 'react';
 import { Grid, Container} from '@material-ui/core'
 import TodoForm from './components/TodoForm';
 import CompletedList from './components/CompletedList';
@@ -11,10 +11,10 @@ function App() {
 
   return (
     <Provider>
-      <Container maxWidth={"sm"}>
+      <Container maxWidth={"md"} >
         <Header text="Task Tracker" />
         <TodoForm  />
-        <Grid container spacing={3}  >
+        <Grid container spacing={3} >
           <Grid item  xs={12}  >
             <IncompletedList />  
           </Grid>

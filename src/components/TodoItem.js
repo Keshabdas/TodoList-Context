@@ -15,7 +15,7 @@ const styles = makeStyles({
         color: "red",
         textDecoration: "none",
     }
-})
+});
 
 
 function TodoItem({todo, index}) {
@@ -25,9 +25,9 @@ function TodoItem({todo, index}) {
     const [inputValue, setInputValue] = useState(todo.taskText);
 
     return (
-        <Paper className={classes.container} >
+        <Paper className={classes.container} elevation={5}>
             <ListItem key={index.toString()} button>
-                <Checkbox tabIndex={-1} onChange={() => onCheckHandler(todo.id)} checked={todo.isComplete}/>
+                <Checkbox tabIndex={-1} onChange={() => onCheckHandler(todo.id)} checked={todo.isComplete} color="primary" size="small" />
                 {
                     todo.isEdit ? 
                     <TextField id="" label="" color="secondary" value={inputValue} onChange={(e) => setInputValue(e.target.value)} fullWidth /> :

@@ -9,11 +9,11 @@ const TodoActions = ({todo, inputValue}) => {
     const {deleteTodo, editHandler, editDone} = useContext(GlobalContext); 
 
     return (
-        <>
+        <div>
             {
                 todo.isComplete ? 
                 <>
-                    <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} >
+                    <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
                         <DeleteIcon />
                     </IconButton>
                 </> 
@@ -21,15 +21,15 @@ const TodoActions = ({todo, inputValue}) => {
                 <>
                     {
                         todo.isEdit ? 
-                        <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue)} >
+                        <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue)} color="primary">
                             <DoneIcon />
                         </IconButton>
                         :
                         <>
-                            <IconButton aria-label='delete' onClick={() => editHandler(todo.id)} >
+                            <IconButton aria-label='delete' onClick={() => editHandler(todo.id)} color="primary">
                                 <EditSharpIcon />
                             </IconButton>
-                            <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} >
+                            <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
                                 <DeleteIcon />
                             </IconButton>
                         </>
@@ -37,7 +37,7 @@ const TodoActions = ({todo, inputValue}) => {
                    
                 </> 
             }
-        </>
+        </div>
     )
 } 
 
