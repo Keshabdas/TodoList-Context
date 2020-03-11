@@ -10,26 +10,24 @@ function CompletedList() {
 
     const {completedList} = useContext(GlobalContext);
 
-
     return (
         <>
             {
                 completedList.length == 0 || typeof(completedList) === undefined ? 
                  null : 
                 <>
-                    <Typography variant="h5" align="center" style={{color: 'green'}}>
+                    <Typography variant="h5" align="center" style={{color: 'green', margin: "0px 0px 10px"}}>
                         Completed ({completedList.length})
                     </Typography>
                     <List>
                         {
                             completedList.map((todo, index) => (
-                                <TodoItem key={index} todo={todo}  index={index}  />
+                                <TodoItem key={todo.id} todo={todo}  />
                             ))
                         }
                     </List>
                 </>
             }
-            
         </>
     )
 }

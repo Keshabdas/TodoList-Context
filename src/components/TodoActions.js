@@ -1,16 +1,28 @@
 import React, { useContext } from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DoneIcon from '@material-ui/icons/Done';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {GlobalContext} from "../context/Provider";
 
 const TodoActions = ({todo, inputValue}) => {
     const {deleteTodo, editHandler, editDone} = useContext(GlobalContext); 
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+
     return (
-        <div>
-            {
+        <>
+            {/* {
                 todo.isComplete ? 
                 <>
                     <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
@@ -21,7 +33,7 @@ const TodoActions = ({todo, inputValue}) => {
                 <>
                     {
                         todo.isEdit ? 
-                        <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue)} color="primary">
+                        <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue, todo.taskText)} color="primary">
                             <DoneIcon />
                         </IconButton>
                         :
@@ -36,8 +48,53 @@ const TodoActions = ({todo, inputValue}) => {
                     }
                    
                 </> 
+            } */}
+            {
+                todo.isEdit ? 
+                <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue, todo.taskText)} color="primary">
+                    <DoneIcon />
+                </IconButton> 
+                :
+                <Tooltip title="options">
+                    <IconButton
+                        aria-label="more"
+                        aria-controls="long-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                    >
+                        <MoreVertIcon />
+                    </IconButton>
+                </Tooltip>
             }
-        </div>
+            <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                {
+                    todo.isComplete ? 
+                    <MenuItem onClick={handleClose}>
+                        <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
+                            <DeleteIcon />
+                        </IconButton>
+                    </MenuItem>
+                    :
+                    <div>
+                        <MenuItem onClick={handleClose}>
+                            <IconButton aria-label='delete' onClick={() => editHandler(todo.id)} color="primary" size="small">
+                                <EditSharpIcon />
+                            </IconButton>
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary" size="small">
+                                <DeleteIcon />
+                            </IconButton>
+                        </MenuItem>
+                    </div>
+                }
+            </Menu>
+        </>
     )
 } 
 

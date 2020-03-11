@@ -2,10 +2,6 @@ import React, {createContext, useReducer, useEffect} from 'react'
 import appReducer from "./AppReducer"
 const initialState = {
     todos: JSON.parse(window.localStorage.getItem("todos")) || [],
-    user: [
-        {id:1, name: "Keshab"},
-        {id:2, name: "kiran"}
-    ],
 }
 
 export const GlobalContext = createContext(initialState);  // Context is defined here
@@ -37,11 +33,11 @@ function Provider({children}) {
             type: "REMOVE_TODO",
             payload: value
         })
-    }
+    }   
 
     const onCheckHandler = (id) => {
         let currentTodos = [...state.todos];
-        let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
+        let selectedIndex = currentTodos.findIndex(todo => todo.id === id);
         currentTodos[selectedIndex].isComplete = !currentTodos[selectedIndex].isComplete;
         currentTodos[selectedIndex].isEdit = false;
         dispatch({
@@ -52,7 +48,7 @@ function Provider({children}) {
 
     const editHandler = (id) => {
         let currentTodos = [...state.todos];
-        let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
+        let selectedIndex = currentTodos.findIndex(todo => todo.id === id);
         currentTodos[selectedIndex].isEdit = !currentTodos[selectedIndex].isEdit;
         dispatch({
             type: "EDIT_TODO",
@@ -60,11 +56,15 @@ function Provider({children}) {
         })
     }
 
-    const editDone = (id, value) => {
+    const editDone = (id, value, defaultValue) => {
         let currentTodos = [...state.todos];
         let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
         currentTodos[selectedIndex].isEdit = !currentTodos[selectedIndex].isEdit;
-        currentTodos[selectedIndex].taskText = value;
+        if(value === ''){
+            currentTodos[selectedIndex].taskText = defaultValue;
+        } else {
+            currentTodos[selectedIndex].taskText = value;
+        }
         dispatch({
             type: "TEXT_EDIT_TODO",
             payload: currentTodos
@@ -77,21 +77,22 @@ function Provider({children}) {
             window.localStorage.setItem("todos", JSON.stringify(Todos));
         }
         UpdateLS(state.todos);
-    }, [state.todos])
+    }, [state])
 
 
     return (
-        <GlobalContext.Provider value={{
-            todos: state.todos,
-            completedList,
-            inCompleteList,
-            addTodo,
-            deleteTodo,
-            onCheckHandler,
-            editHandler,
-            editDone
-        }}>
-            {children}
+        <GlobalContext.Provider 
+            value={{
+                todos: state.todos,
+                completedList,
+                inCompleteList,
+                addTodo,
+                deleteTodo,
+                onCheckHandler,
+                editHandler,
+                editDone
+            }}>
+                {children}
         </GlobalContext.Provider>
     )
 }
