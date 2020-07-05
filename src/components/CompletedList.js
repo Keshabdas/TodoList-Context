@@ -1,7 +1,7 @@
-import React, {useState, useContext,useEffect} from 'react'
+import React, {useContext} from 'react'
 import { List,  Typography } from '@material-ui/core';
 import TodoItem from './TodoItem';
-import NoData from "./Nodata";
+// import NoData from "./Nodata";
 import { GlobalContext } from '../context/Provider';
 
 
@@ -13,10 +13,10 @@ function CompletedList() {
     return (
         <>
             {
-                completedList.length == 0 || typeof(completedList) === undefined ? 
+                completedList.length === 0 || typeof(completedList) === undefined ? 
                  null : 
                 <>
-                    <Typography variant="h5" align="center" style={{color: 'green', margin: "0px 0px 10px"}}>
+                    <Typography variant="h5" align="center" style={{color: 'green'}}>
                         Completed ({completedList.length})
                     </Typography>
                     <List>
