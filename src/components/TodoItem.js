@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { ListItem, Tooltip, ListItemText, ListItemSecondaryAction, IconButton, Paper, makeStyles,TextField } from '@material-ui/core';
+import { ListItem, Tooltip, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField } from '@material-ui/core';
 import {GlobalContext} from "../context/Provider";
 import TodoActions from "./TodoActions";
 
