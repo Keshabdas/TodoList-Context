@@ -13,12 +13,21 @@ const styles = makeStyles({
     },
     complete: {
         color: "green",
-        textDecoration: "line-through",
+        '& > span': {
+            textDecoration: "line-through",
+        }
     },
     incomplete: {
         color: "red",
         textDecoration: "none",
-    }
+    },
+    secondaryTxt: {
+        fontSize: 12,
+        marginTop: 8,
+    },
+    primaryTxt: {
+        fontSize: '1.2rem',
+    },
 });
 
 
@@ -31,18 +40,26 @@ function TodoItem({todo}) {
     const changeHandler = (e) => {
         setInputValue(e.target.value);
     }
+
+    const taskDate = todo.createdAt && new Date(todo.createdAt).toDateString();
+
    
     return (
         <Paper className={classes.container} elevation={3}>
             <ListItem  onDoubleClick={() => onCheckHandler(todo.id)}>
-                {/* <Checkbox tabIndex={-1} onChange={() => onCheckHandler(todo.id)} checked={todo.isComplete} color="primary" size="small" /> */}
                 {
                     todo.isEdit ? 
                     <TextField id="inputText" color="primary" value={inputValue} onChange={(e) => changeHandler(e)} fullWidth multiline />
                     :
                     <ListItemText 
-                        primary={todo.taskText} 
+                        multiline='true'
+                        primary={todo.taskText}
+                        secondary={taskDate || ''}
                         className={todo.isComplete ? classes.complete : classes.incomplete}
+                        classes={{
+                            primary: classes.primaryTxt,
+                            secondary: classes.secondaryTxt
+                        }}
                     />
                 }
                 <ListItemSecondaryAction>

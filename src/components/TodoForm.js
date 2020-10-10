@@ -8,8 +8,8 @@ function TodoForm() {
     const {addTodo}  = useContext(GlobalContext);
 
     const ClearInput = () => (
-        <IconButton>
-            <ClearIcon color="primary" onClick={() => setvalue('')} />
+        <IconButton onClick={() => setvalue('')}>
+            <ClearIcon color="action" />
         </IconButton>
     );
 

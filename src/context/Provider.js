@@ -15,7 +15,8 @@ function Provider({children}) {
     const addTodo = (value) => {
         let trimmedText = value.trim();
         let newTask = {
-            id: Math.floor(Math.random() * 100000000),
+            id: Date.now(),
+            createdAt: Date.now(),
             taskText: trimmedText,
             isComplete: false,
             isEdit: false,
