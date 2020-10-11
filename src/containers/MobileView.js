@@ -36,7 +36,7 @@ function MobileView() {
                     <BottomNavigationAction label="Complete" value="Complete" icon={<CheckCircleOutlineIcon />} />
                 </BottomNavigation>
             </AppBar>
-            <Grid container spacing={3} style={{ marginTop: 30 }} >
+            <Grid container spacing={3} style={{ marginTop: 30, marginBottom: 40 }} >
                 <Grid item xs={12}>  
                     {value === 'Incomplete' ? <IncompletedList /> : <CompletedList />}
                 </Grid>
