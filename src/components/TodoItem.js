@@ -30,11 +30,14 @@ const styles = makeStyles({
     },
     secondaryAction: {
         right: 4,
+    },
+    secondaryActionMobile: {
+        right: 2,
     }
 });
 
 
-function TodoItem({todo}) {
+function TodoItem({todo, isMobile}) {
     const { onCheckHandler } = useContext(GlobalContext); 
     const classes = styles();
 
@@ -65,7 +68,7 @@ function TodoItem({todo}) {
                         }}
                     />
                 }
-                <ListItemSecondaryAction classes={{ root: classes.secondaryAction }}>
+                <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
                     <TodoActions todo={todo} inputValue={inputValue} />
                 </ListItemSecondaryAction>
             </ListItem>

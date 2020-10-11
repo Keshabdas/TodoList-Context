@@ -3,7 +3,7 @@ import { List,  Typography } from '@material-ui/core';
 import TodoItem from './TodoItem';
 import {GlobalContext} from "../context/Provider"
 
-function IncompletedList() {
+function IncompletedList(props) {
     
     const {inCompleteList} = useContext(GlobalContext);
 
@@ -20,7 +20,7 @@ function IncompletedList() {
                     <List> 
                         {
                             inCompleteList.map((todo) => (
-                                <TodoItem key={todo.id} todo={todo}  />
+                                <TodoItem key={todo.id} todo={todo} {...props}   />
                             ))
                         }
                     </List>

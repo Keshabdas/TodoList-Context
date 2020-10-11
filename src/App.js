@@ -15,7 +15,7 @@ function App() {
       <Container maxWidth={"lg"} >
         <Header text="Task Tracker" />
         <TodoForm />
-        {isMobile ? <MobileView /> : <WebView />}
+        {isMobile ? <MobileView isMobile={isMobile} /> : <WebView />}
       </Container>
     </Provider>
   );

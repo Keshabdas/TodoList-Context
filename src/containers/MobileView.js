@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     },
 });
 
-function MobileView() {
+function MobileView(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState('Incomplete');
 
@@ -38,7 +38,7 @@ function MobileView() {
             </AppBar>
             <Grid container spacing={3} style={{ marginTop: 30, marginBottom: 40 }} >
                 <Grid item xs={12}>  
-                    {value === 'Incomplete' ? <IncompletedList /> : <CompletedList />}
+                    {value === 'Incomplete' ? <IncompletedList {...props} /> : <CompletedList {...props} />}
                 </Grid>
             </Grid>
         </>
