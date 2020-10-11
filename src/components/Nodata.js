@@ -17,7 +17,7 @@ function Nodata({primaryText, secondaryText}) {
 
     return (
         <div className={classes.main}>
-            <Typography variant="h5" className={classes.text}>
+            <Typography variant="h5" className={classes.text} align="center">
                 {primaryText}
                 <br/>
                 {secondaryText}
