@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import { List,  Typography } from '@material-ui/core';
 import TodoItem from './TodoItem';
 import {GlobalContext} from "../context/Provider"
+import Nodata from './Nodata';
 
 function IncompletedList(props) {
     
@@ -11,7 +12,9 @@ function IncompletedList(props) {
         <>
             {
                 inCompleteList.length === 0 || typeof(inCompleteList) === undefined ? 
-                null
+                <>
+                {props.isMobile ? <Nodata primaryText="No Incompleted" secondaryText="Task Available" /> : null}
+                </>
                 :
                 <>
                     <Typography variant="h5" align="center" color="error">

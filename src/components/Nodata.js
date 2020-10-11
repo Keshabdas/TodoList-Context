@@ -1,13 +1,28 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 
-function Nodata({text}) {
+const useStyles = makeStyles({
+    main: {
+        display: 'grid',
+        placeItems: 'center',
+        height: '50vh',
+    },
+    text: {
+        color: '#777'
+    }
+})
+
+function Nodata({primaryText, secondaryText}) {
+    const classes = useStyles();
+
     return (
-        <>
-            <Typography variant="h6" align="center">
-                {text}
+        <div className={classes.main}>
+            <Typography variant="h5" className={classes.text}>
+                {primaryText}
+                <br/>
+                {secondaryText}
             </Typography>
-        </>
+        </div>
     )
 }
 
