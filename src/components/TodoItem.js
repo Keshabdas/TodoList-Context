@@ -28,6 +28,9 @@ const styles = makeStyles({
     primaryTxt: {
         fontSize: '1.2rem',
     },
+    secondaryAction: {
+        right: 4,
+    }
 });
 
 
@@ -62,7 +65,7 @@ function TodoItem({todo}) {
                         }}
                     />
                 }
-                <ListItemSecondaryAction>
+                <ListItemSecondaryAction classes={{ root: classes.secondaryAction }}>
                     <TodoActions todo={todo} inputValue={inputValue} />
                 </ListItemSecondaryAction>
             </ListItem>

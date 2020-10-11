@@ -1,26 +1,21 @@
 import React from 'react';
-import { Grid, Container} from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import TodoForm from './components/TodoForm';
-import CompletedList from './components/CompletedList';
-import IncompletedList from './components/IncompleteList';
-import Provider from './context/Provider';
 import Header from './components/Header';
+import WebView from './containers/WebView';
+import Provider from './context/Provider';
 import './App.css';
+import MobileView from './containers/MobileView';
 
 function App() {
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
   return (
     <Provider>
       <Container maxWidth={"lg"} >
         <Header text="Task Tracker" />
-        <TodoForm  />
-        <Grid container spacing={3} style={{ marginTop: 30 }} >
-          <Grid item md={6} xs={12}>
-            <IncompletedList />  
-          </Grid>
-          <Grid item md={6} xs={12}>
-            <CompletedList />
-          </Grid>
-        </Grid>
+        <TodoForm />
+        {isMobile ? <MobileView /> : <WebView />}
       </Container>
     </Provider>
   );
