@@ -39,7 +39,7 @@ function MobileView(props) {
                     <BottomNavigationAction label="Complete" value="Complete" icon={<Badge color="secondary" badgeContent={completedList.length || 0}><CheckCircleOutlineIcon /></Badge>} />
                 </BottomNavigation>
             </AppBar>
-            <Grid container spacing={3} style={{ marginTop: 30, marginBottom: 40 }} >
+            <Grid container spacing={3} style={{ marginTop: 10, marginBottom: 40 }} >
                 <Grid item xs={12}>  
                     {value === 'Incomplete' ? <IncompletedList {...props} /> : <CompletedList {...props} />}
                 </Grid>

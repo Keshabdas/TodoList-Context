@@ -17,9 +17,9 @@ function IncompletedList(props) {
                 </>
                 :
                 <>
-                    {props.isMobile ? null : (<Typography variant="h5" align="center" color="error">
-                        Incomplete ({inCompleteList.length})
-                    </Typography>)}
+                    <Typography variant="h5" align="center" color="error">
+                        Incomplete {props.isMobile ? null : `(${inCompleteList.length})`}
+                    </Typography>
                     <List> 
                         {
                             inCompleteList.map((todo) => (

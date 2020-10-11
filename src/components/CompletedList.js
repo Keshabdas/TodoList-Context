@@ -19,7 +19,7 @@ function CompletedList(props) {
                 </> : 
                 <>
                     <Typography variant="h5" align="center" style={{color: 'green'}}>
-                        Completed ({completedList.length})
+                        Completed {props.isMobile ? null : `(${completedList.length})`}
                     </Typography>
                     <List>
                         {
