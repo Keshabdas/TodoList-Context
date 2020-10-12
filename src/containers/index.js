@@ -11,7 +11,7 @@ function Mainview(props) {
     return (
         <>
             <div id="back-to-top-anchor"></div>
-            <Header text="Task Tracker" />
+            <Header text="Task Tracker" {...props} />
             <TodoForm />
             {props.isMobile ? <MobileView isMobile={props.isMobile} /> : <WebView />}
             <ScrollTop {...props}>

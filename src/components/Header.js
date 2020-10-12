@@ -1,5 +1,6 @@
 import React from 'react'
 import {Typography, makeStyles, AppBar} from '@material-ui/core'
+import HideOnScroll from './HideOnScroll';
 
 const myStyle = makeStyles({
     root: {
@@ -11,14 +12,16 @@ const myStyle = makeStyles({
     }
 })
 
-function Header({text}) {
+function Header(props) {
     const classes = myStyle();
     return (
-        <AppBar className={classes.root} >
-            <Typography variant="h4" align="center" className={classes.title}  >
-                {text}
-            </Typography>
-        </AppBar>
+        <HideOnScroll {...props}>
+            <AppBar className={classes.root} >
+                <Typography variant="h4" align="center" className={classes.title}  >
+                    {props.text}
+                </Typography>
+            </AppBar>
+        </HideOnScroll>
     )
 }
 
