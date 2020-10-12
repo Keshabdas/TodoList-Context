@@ -14,7 +14,7 @@ const myStyle = makeStyles({
 function Header({text}) {
     const classes = myStyle();
     return (
-        <AppBar className={classes.root}>
+        <AppBar className={classes.root} >
             <Typography variant="h4" align="center" className={classes.title}  >
                 {text}
             </Typography>
