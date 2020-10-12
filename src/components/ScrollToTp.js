@@ -26,7 +26,7 @@ function ScrollToTp(props) {
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
         disableHysteresis: true,
-        threshold: isMobile ? 150 : 500
+        threshold: isMobile ? 300 : 500
     });
 
     const handleClick = (event) => {
