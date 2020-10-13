@@ -2,6 +2,9 @@ import React, {createContext, useReducer, useEffect} from 'react'
 import appReducer from "./AppReducer"
 const initialState = {
     todos: JSON.parse(window.localStorage.getItem("todos")) || [],
+    isSnackBarOpen: false,
+    alertSeverity: '',
+    alertMessage: '',
 }
 
 export const GlobalContext = createContext(initialState);  // Context is defined here
@@ -9,9 +12,14 @@ export const GlobalContext = createContext(initialState);  // Context is defined
 function Provider({children}) {
     const [state, dispatch] = useReducer(appReducer, initialState);
     
+    // state bindings
     const completedList = state.todos.filter(todo => todo.isComplete === true);
     const inCompleteList = state.todos.filter(todo => todo.isComplete === false);
+    const showSnackbar = state.isSnackBarOpen;
+    const alertSeverity = state.alertSeverity;
+    const alertMessage = state.alertMessage;
 
+    // all actions 
     const addTodo = (value) => {
         let trimmedText = value.trim();
         let newTask = {
@@ -25,7 +33,8 @@ function Provider({children}) {
             dispatch({
                 type: "ADD_TODO",
                 payload: newTask
-            })
+            });
+            openSnackbar('success', 'New Task Added')
         }
     }
 
@@ -33,7 +42,8 @@ function Provider({children}) {
         dispatch({
             type: "REMOVE_TODO",
             payload: value
-        })
+        });
+        openSnackbar('error', 'Task Deleted.')
     }   
 
     const onCheckHandler = (id) => {
@@ -45,6 +55,7 @@ function Provider({children}) {
             type: "CHECK_HANDLER",
             payload: currentTodos
         })
+        currentTodos[selectedIndex].isComplete && openSnackbar('success', 'Task Completed.');
     }
 
     const editHandler = (id) => {
@@ -70,6 +81,19 @@ function Provider({children}) {
             type: "TEXT_EDIT_TODO",
             payload: currentTodos
         })
+        openSnackbar('success', 'Task Edited.');
+    }
+
+    const openSnackbar = (type, msg) => {
+        dispatch({
+            type: "OPEN_SNACKBAR",
+            payload: {alertType: type, message: msg}
+        })
+    }
+    const closeSnackbar = (type, msg) => {
+        dispatch({
+            type: "CLOSE_SNACKBAR",
+        });
     }
 
     useEffect(() => {
@@ -91,7 +115,12 @@ function Provider({children}) {
                 deleteTodo,
                 onCheckHandler,
                 editHandler,
-                editDone
+                editDone,
+                showSnackbar,
+                alertSeverity,
+                alertMessage,
+                openSnackbar,
+                closeSnackbar,
             }}>
                 {children}
         </GlobalContext.Provider>

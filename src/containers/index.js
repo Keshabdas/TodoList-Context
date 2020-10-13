@@ -6,6 +6,8 @@ import MobileView from './MobileView';
 import ScrollTop from '../components/ScrollToTp'
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import CustomSnackbar from '../components/CustomSnackbar';
+
 
 function Mainview(props) {
     return (
@@ -19,6 +21,7 @@ function Mainview(props) {
                     <KeyboardArrowUpIcon />
                 </Fab>
             </ScrollTop>
+            <CustomSnackbar />
         </>
     )
 }

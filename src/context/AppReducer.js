@@ -25,6 +25,20 @@ export default (state, action) => {
                 ...state,
                 todos: action.payload
             }
+        case "OPEN_SNACKBAR":
+            return {
+                ...state,
+                isSnackBarOpen: true,
+                alertSeverity: action.payload.alertType,
+                alertMessage: action.payload.message,
+            }
+        case "CLOSE_SNACKBAR":
+            return {
+                ...state,
+                isSnackBarOpen: false,
+                alertSeverity: '',
+                alertMessage: '',
+            }
         default: 
             return state;
     }
