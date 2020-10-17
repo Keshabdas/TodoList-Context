@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { makeStyles, AppBar, Grid, Badge } from '@material-ui/core';
+import { makeStyles, AppBar, Grid, Badge, withStyles } from '@material-ui/core';
 import {GlobalContext} from "../context/Provider"
 import CompletedList from '../components/CompletedList';
 import IncompletedList from '../components/IncompleteList';
@@ -21,6 +21,14 @@ const useStyles = makeStyles({
     },
 });
 
+
+const StyledBadge = withStyles((theme) => ({
+    badge: {
+        background: 'green',
+        color: 'white',
+    }
+}))(Badge);
+
 function MobileView(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState('Incomplete');
@@ -35,8 +43,8 @@ function MobileView(props) {
         <>
             <AppBar position="fixed" className={classes.appBar}>
                 <BottomNavigation value={value} showLabels onChange={handleChange} className={classes.root}>
-                    <BottomNavigationAction label="Incomplete" value="Incomplete" icon={<Badge color="secondary" badgeContent={inCompleteList.length || 0}><RadioButtonUncheckedIcon /></Badge>} />
-                    <BottomNavigationAction label="Complete" value="Complete" icon={<Badge color="secondary" badgeContent={completedList.length || 0}><CheckCircleOutlineIcon /></Badge>} />
+                    <BottomNavigationAction label="Incomplete" value="Incomplete" icon={<Badge color="error" badgeContent={inCompleteList.length || 0}><RadioButtonUncheckedIcon /></Badge>} />
+                    <BottomNavigationAction label="Complete" value="Complete" icon={<StyledBadge badgeContent={completedList.length || 0}><CheckCircleOutlineIcon /></StyledBadge>} />
                 </BottomNavigation>
             </AppBar>
             <Grid container spacing={3} style={{ marginTop: 10, marginBottom: 40 }} >
