@@ -13,8 +13,8 @@ function CustomSnackbar() {
 
     return (
         <div>
-            <Snackbar open={showSnackbar} autoHideDuration={2000} onClose={closeSnackbar} >
-                <Alert onClose={closeSnackbar} severity={alertSeverity}>{alertMessage}</Alert>
+            <Snackbar open={showSnackbar} autoHideDuration={4000} onClose={closeSnackbar} >
+                <Alert onClose={closeSnackbar} severity={alertSeverity || 'info'}>{alertMessage}</Alert>
             </Snackbar>
         </div>
     )
