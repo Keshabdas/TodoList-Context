@@ -7,7 +7,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {GlobalContext} from "../context/Provider";
 
 const TodoActions = ({todo, inputValue}) => {
-    const {deleteTodo, editHandler, editDone} = useContext(GlobalContext); 
+    const {deleteTodo, editHandler, editDone, showDialog} = useContext(GlobalContext); 
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -75,7 +75,7 @@ const TodoActions = ({todo, inputValue}) => {
                 {
                     todo.isComplete ? 
                     <MenuItem onClick={handleClose}>
-                        <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
+                        <IconButton aria-label='delete' onClick={() => showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?')} color="secondary">
                             <DeleteIcon />
                         </IconButton>
                     </MenuItem>
@@ -87,7 +87,7 @@ const TodoActions = ({todo, inputValue}) => {
                             </IconButton>
                         </MenuItem>
                         <MenuItem onClick={handleClose}>
-                            <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary" size="small">
+                            <IconButton aria-label='delete' onClick={() => showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?')} color="secondary" size="small">
                                 <DeleteIcon />
                             </IconButton>
                         </MenuItem>

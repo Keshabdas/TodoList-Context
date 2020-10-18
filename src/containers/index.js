@@ -7,6 +7,7 @@ import ScrollTop from '../components/ScrollToTp'
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import CustomSnackbar from '../components/CustomSnackbar';
+import CustomDialog from '../components/CustomDialog';
 
 
 function Mainview(props) {
@@ -22,6 +23,7 @@ function Mainview(props) {
                 </Fab>
             </ScrollTop>
             <CustomSnackbar />
+            <CustomDialog />
         </>
     )
 }

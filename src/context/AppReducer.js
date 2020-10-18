@@ -39,6 +39,22 @@ export default (state, action) => {
                 alertSeverity: '',
                 alertMessage: '',
             }
+        case "SHOW_DIALOG":
+            return {
+                ...state,
+                isDialogOpen: true,
+                todoSelected: action.payload.id,
+                dialogTitle: action.payload.title,
+                dialogContent: action.payload.content,
+            }
+        case "HIDE_DIALOG":
+            return {
+                ...state,
+                isDialogOpen: false,
+                todoSelected: null,
+                dialogTitle: '',    
+                dialogContent: '',
+            }
         default: 
             return state;
     }

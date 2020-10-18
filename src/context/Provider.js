@@ -5,6 +5,10 @@ const initialState = {
     isSnackBarOpen: false,
     alertSeverity: '',
     alertMessage: '',
+    isDialogOpen: false,
+    dialogTitle: '',
+    dialogContent: '',
+    todoSelected: null,
 }
 
 export const GlobalContext = createContext(initialState);  // Context is defined here
@@ -18,6 +22,7 @@ function Provider({children}) {
     const showSnackbar = state.isSnackBarOpen;
     const alertSeverity = state.alertSeverity;
     const alertMessage = state.alertMessage;
+    const todoSelected = state.todoSelected;
 
     // all actions 
     const addTodo = (value) => {
@@ -97,6 +102,19 @@ function Provider({children}) {
         });
     }
 
+    const showDialog = (id, title, content) => {
+        dispatch({
+            type: "SHOW_DIALOG",
+            payload: {id, title, content},
+        })
+    }
+
+    const hideDialog = () => {
+        dispatch({
+            type: "HIDE_DIALOG",
+        })
+    }
+
     useEffect(() => {
         const UpdateLS = (todos) => {
             let Todos = [...todos];
@@ -112,6 +130,7 @@ function Provider({children}) {
                 todos: state.todos,
                 completedList,
                 inCompleteList,
+                todoSelected,
                 addTodo,
                 deleteTodo,
                 onCheckHandler,
@@ -122,6 +141,11 @@ function Provider({children}) {
                 alertMessage,
                 openSnackbar,
                 closeSnackbar,
+                showDialog,
+                hideDialog,
+                isDialogOpen: state.isDialogOpen,
+                dialogTitle: state.dialogTitle,
+                dialogContent: state.dialogContent,
             }}>
                 {children}
         </GlobalContext.Provider>
