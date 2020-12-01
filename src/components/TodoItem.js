@@ -27,6 +27,7 @@ const styles = makeStyles({
     },
     primaryTxt: {
         fontSize: '1.2rem',
+        wordBreak: 'break-word',
     },
     secondaryAction: {
         right: 4,

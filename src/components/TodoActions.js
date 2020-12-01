@@ -75,7 +75,7 @@ const TodoActions = ({todo, inputValue}) => {
                 {
                     todo.isComplete ? 
                     <MenuItem onClick={handleClose}>
-                        <IconButton aria-label='delete' onClick={() => showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?')} color="secondary">
+                        <IconButton aria-label='delete' onClick={() => deleteTodo(todo.id)} color="secondary">
                             <DeleteIcon />
                         </IconButton>
                     </MenuItem>
