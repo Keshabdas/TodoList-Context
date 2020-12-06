@@ -6,7 +6,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {GlobalContext} from "../context/Provider";
 
-const TodoActions = ({todo, inputValue}) => {
+const TodoActions = ({todo, inputValue, setInputValue}) => {
     const {deleteTodo, editHandler, editDone, showDialog} = useContext(GlobalContext); 
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -18,6 +18,11 @@ const TodoActions = ({todo, inputValue}) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleEditDone = () => {
+        editDone(todo.id, inputValue, todo.taskText);
+        setInputValue(inputValue.trim());
+    }
 
 
     return (
@@ -51,7 +56,7 @@ const TodoActions = ({todo, inputValue}) => {
             } */}
             {
                 todo.isEdit ? 
-                <IconButton aria-label='delete' onClick={() => editDone(todo.id, inputValue, todo.taskText)} color="primary">
+                <IconButton aria-label='delete' onClick={() => handleEditDone()} color="primary">
                     <DoneIcon />
                 </IconButton> 
                 :

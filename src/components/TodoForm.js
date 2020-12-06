@@ -30,7 +30,7 @@ function TodoForm() {
                     fullWidth 
                     autoFocus={true}
                     InputProps={{
-                        endAdornment: <ClearInput />
+                        endAdornment: value.length === 0 ? null : <ClearInput />
                     }}
                 />
             </form>

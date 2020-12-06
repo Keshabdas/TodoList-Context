@@ -70,7 +70,7 @@ function TodoItem({todo, isMobile}) {
                     />
                 }
                 <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
-                    <TodoActions todo={todo} inputValue={inputValue} />
+                    <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />
                 </ListItemSecondaryAction>
             </ListItem>
         </Paper>

@@ -79,9 +79,9 @@ function Provider({children}) {
         let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
         currentTodos[selectedIndex].isEdit = !currentTodos[selectedIndex].isEdit;
         if(value === ''){
-            currentTodos[selectedIndex].taskText = defaultValue;
+            currentTodos[selectedIndex].taskText = defaultValue.trim();
         } else {
-            currentTodos[selectedIndex].taskText = value;
+            currentTodos[selectedIndex].taskText = value.trim();
         }
         dispatch({
             type: "TEXT_EDIT_TODO",
