@@ -24,7 +24,7 @@ function CompletedList(props) {
                     <List>
                         {
                             completedList.map((todo, index) => (
-                                <TodoItem key={todo.id} todo={todo} {...props}  />
+                                <TodoItem key={todo.id} todo={todo} {...props} completedList={completedList}  />
                             ))
                         }
                     </List>

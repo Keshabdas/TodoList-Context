@@ -5,7 +5,7 @@ import TodoActions from "./TodoActions";
 import { SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Avatar from '@material-ui/core/Avatar';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DoneIcon from '@material-ui/icons/Done';
 
 const styles = makeStyles({
@@ -20,10 +20,10 @@ const styles = makeStyles({
         "& .MuiListItem-container": {
             width: '100%',
         },
-        "& .listItem": {
-            border: '1px solid black',
-            borderRadius: 4,
-        }
+        // "& .listItem": {
+        //     border: '1px solid black',
+        //     borderRadius: 4,
+        // }
     },
     complete: {
         color: "green",
@@ -52,8 +52,8 @@ const styles = makeStyles({
 });
 
 
-function TodoItem({todo, isMobile}) {
-    const { onCheckHandler, showDialog } = useContext(GlobalContext); 
+function TodoItem({todo, isMobile, completedList}) {
+    const { onCheckHandler, showDialog, deleteTodo } = useContext(GlobalContext); 
     const classes = styles();
 
     const [inputValue, setInputValue] = useState(todo.taskText);
@@ -65,19 +65,19 @@ function TodoItem({todo, isMobile}) {
     const taskDate = todo.createdAt && new Date(todo.createdAt).toDateString();
 
     const leftContent = (
-        <ListItem>
+        <ListItem style={{ background: 'green', height: '100%', color: '#fff' }}>
             <ListItemIcon style={{ minWidth: 20, marginRight: 8 }}>
-                <DoneIcon color="primary" />
+                <DoneIcon style={{ color: '#fff' }} />
             </ListItemIcon>
-            <ListItemText primary="Mark complete" />
+            <ListItemText primary={completedList ? "Mark incomplete" : "Mark complete"} />
         </ListItem>
     );
 
     const rightContent = (
-        <ListItem>
+        <ListItem style={{ background: 'red', height: '100%', color: '#fff' }}>
             <ListItemText primary="Delete" style={{ textAlign: 'right' }} />
             <ListItemIcon style={{ justifyContent: 'flex-end', minWidth: 20, marginLeft: 8 }}>
-                <DeleteIcon color="error" />
+                <DeleteOutlineIcon style={{ color: '#fff' }} />
             </ListItemIcon>
         </ListItem>
     );
@@ -87,7 +87,7 @@ function TodoItem({todo, isMobile}) {
             <SwipeableListItem
                 swipeLeft={{
                     content: rightContent,
-                    action: () => showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?'),
+                    action: () => completedList ? deleteTodo(todo.id) : showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?'),
                 }}
                 swipeRight={{
                     content: leftContent,

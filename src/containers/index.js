@@ -15,7 +15,7 @@ function Mainview(props) {
             <div id="back-to-top-anchor"></div>
             <Header text="Task Tracker" {...props} />
             <TodoForm />
-            {props.isMobile ? <MobileView isMobile={props.isMobile} /> : <WebView />}
+            {props.isMobile ? <MobileView isMobile={props.isMobile} /> : <WebView isMobile={props.isMobile} />}
             <ScrollTop {...props}>
                 <Fab color="primary" size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
