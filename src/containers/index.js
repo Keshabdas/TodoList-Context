@@ -9,7 +9,6 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import CustomSnackbar from '../components/CustomSnackbar';
 import CustomDialog from '../components/CustomDialog';
 
-
 function Mainview(props) {
     return (
         <>

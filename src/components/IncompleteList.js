@@ -3,6 +3,8 @@ import { List,  Typography } from '@material-ui/core';
 import TodoItem from './TodoItem';
 import {GlobalContext} from "../context/Provider"
 import Nodata from './Nodata';
+import { SwipeableList, SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
+import '@sandstreamdev/react-swipeable-list/dist/styles.css';
 
 function IncompletedList(props) {
     
@@ -20,13 +22,15 @@ function IncompletedList(props) {
                     <Typography variant="h5" align="center" color="error">
                         Incomplete {props.isMobile ? null : `(${inCompleteList.length})`}
                     </Typography>
-                    <List> 
-                        {
-                            inCompleteList.map((todo) => (
-                                <TodoItem key={todo.id} todo={todo} {...props}   />
-                            ))
-                        }
-                    </List>
+                    <SwipeableList>
+                        <List> 
+                            {
+                                inCompleteList.map((todo) => (
+                                        <TodoItem key={todo.id} todo={todo} {...props}   />
+                                    ))
+                                }
+                        </List>
+                    </SwipeableList>
                 </>
             }
             
