@@ -8,18 +8,26 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         position: 'absolute',
         bottom: 0,
-        background: '#f3f3f3',
+        background: theme.palette.type === 'dark' ? null : '#f3f3f3',
+        padding: '10px 0px',
+        '& .MuiBottomNavigationAction-root': {
+            maxWidth: 'inherit',
+        },
+        '& .MuiBottomNavigationAction-root.Mui-selected': {
+            color: theme.palette.type === 'dark' ? '#90caf9' : null,
+            fontWeight: 600,
+        }
     },
     appBar: {
         top: "auto",
         bottom: 0,
     },
-});
+}));
 
 
 const StyledBadge = withStyles((theme) => ({
@@ -47,7 +55,7 @@ function MobileView(props) {
                     <BottomNavigationAction label="Complete" value="Complete" icon={<StyledBadge badgeContent={completedList.length || 0}><CheckCircleOutlineIcon /></StyledBadge>} />
                 </BottomNavigation>
             </AppBar>
-            <Grid container spacing={3} style={{ marginTop: 10, marginBottom: 40 }} >
+            <Grid container spacing={3} style={{ marginTop: 10, marginBottom: 60 }} >
                 <Grid item xs={12}>  
                     {value === 'Incomplete' ? <IncompletedList {...props} /> : <CompletedList {...props} />}
                 </Grid>

@@ -55,6 +55,11 @@ export default (state, action) => {
                 dialogTitle: '',    
                 dialogContent: '',
             }
+        case "CHANGE_THEME":
+            return {
+                ...state,
+                isDarkModeOn: action.payload,
+            }
         default: 
             return state;
     }

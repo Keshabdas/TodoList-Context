@@ -14,7 +14,7 @@ function TodoForm() {
     );
 
     return (
-        <Paper elevation={10} style={{marginTop: "98px"}}>
+        <Paper elevation={10} style={{ marginTop: 71 }}>
             <form
                 onSubmit={event => {
                     event.preventDefault();

@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DoneIcon from '@material-ui/icons/Done';
 
-const styles = makeStyles({
+const styles = makeStyles((theme) => ({
     container: {
         marginBottom: "15px",
         marginLeft: 5,
@@ -20,19 +20,18 @@ const styles = makeStyles({
         "& .MuiListItem-container": {
             width: '100%',
         },
-        // "& .listItem": {
-        //     border: '1px solid black',
-        //     borderRadius: 4,
-        // }
+        "& .listItem": {
+            backgroundColor: theme.palette.type === 'dark' ?  '#424242' : null,
+        }
     },
     complete: {
-        color: "green",
+        color: theme.palette.type === 'dark' ? null : "green",
         '& > span': {
             textDecoration: "line-through",
         }
     },
     incomplete: {
-        color: "red",
+        color: theme.palette.type === 'dark' ? null : "red",
         textDecoration: "none",
     },
     secondaryTxt: {
@@ -49,7 +48,7 @@ const styles = makeStyles({
     secondaryActionMobile: {
         right: 2,
     }
-});
+}));
 
 
 function TodoItem({todo, isMobile, completedList}) {

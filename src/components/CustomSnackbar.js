@@ -5,10 +5,10 @@ import { GlobalContext } from '../context/Provider';
 
 function CustomSnackbar() {
 
-    const {showSnackbar, alertSeverity, alertMessage, closeSnackbar } = useContext(GlobalContext);
+    const {showSnackbar, alertSeverity, alertMessage, closeSnackbar, isDarkModeOn } = useContext(GlobalContext);
 
     const Alert = (props) => {
-        return <MuiAlert elevation={6} variant="filled" {...props} />;
+        return <MuiAlert elevation={6} variant={isDarkModeOn ? "standard" : "filled"} {...props} />;
     }
 
     return (

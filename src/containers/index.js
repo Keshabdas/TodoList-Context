@@ -11,11 +11,12 @@ import CustomDialog from '../components/CustomDialog';
 
 function Mainview(props) {
     return (
-        <>
+        <div>
             <div id="back-to-top-anchor"></div>
             <Header text="Task Tracker" {...props} />
+            <br />
             <TodoForm />
-            {props.isMobile ? <MobileView isMobile={props.isMobile} /> : <WebView isMobile={props.isMobile} />}
+            {props.isMobile ? <MobileView isMobile={props.isMobile}  /> : <WebView isMobile={props.isMobile} />}
             <ScrollTop {...props}>
                 <Fab color="primary" size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
@@ -23,7 +24,7 @@ function Mainview(props) {
             </ScrollTop>
             <CustomSnackbar />
             <CustomDialog />
-        </>
+        </div>
     )
 }
 

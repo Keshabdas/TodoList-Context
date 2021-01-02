@@ -9,6 +9,7 @@ const initialState = {
     dialogTitle: '',
     dialogContent: '',
     todoSelected: null,
+    isDarkModeOn: Boolean(parseInt(window.localStorage.getItem("darkMode"), 10)) || false,
 }
 
 export const GlobalContext = createContext(initialState);  // Context is defined here
@@ -16,6 +17,10 @@ export const GlobalContext = createContext(initialState);  // Context is defined
 function Provider({children}) {
     const [state, dispatch] = useReducer(appReducer, initialState);
     
+    useEffect(() => {
+        UpdateLS(state.todos);
+    }, [state]);
+
     // state bindings
     const completedList = state.todos.filter(todo => todo.isComplete === true);
     const inCompleteList = state.todos.filter(todo => todo.isComplete === false);
@@ -23,6 +28,7 @@ function Provider({children}) {
     const alertSeverity = state.alertSeverity;
     const alertMessage = state.alertMessage;
     const todoSelected = state.todoSelected;
+    const isDarkModeOn = state.isDarkModeOn;
 
     // all actions 
     const addTodo = (value) => {
@@ -114,15 +120,19 @@ function Provider({children}) {
             type: "HIDE_DIALOG",
         })
     }
+    const changeTheme = () => {
+        dispatch({
+            type: "CHANGE_THEME",
+            payload: !isDarkModeOn,
+        });
+        let mode = !isDarkModeOn ? 1 : 0;
+        window.localStorage.setItem("darkMode",  mode);
+    }
 
-    useEffect(() => {
-        const UpdateLS = (todos) => {
-            let Todos = [...todos];
-            window.localStorage.setItem("todos", JSON.stringify(Todos));
-        }
-        UpdateLS(state.todos);
-    }, [state])
-
+    const UpdateLS = (todos) => {
+        let Todos = [...todos];
+        window.localStorage.setItem("todos", JSON.stringify(Todos));
+    }
 
     return (
         <GlobalContext.Provider 
@@ -131,6 +141,7 @@ function Provider({children}) {
                 completedList,
                 inCompleteList,
                 todoSelected,
+                isDarkModeOn,
                 addTodo,
                 deleteTodo,
                 onCheckHandler,
@@ -143,6 +154,7 @@ function Provider({children}) {
                 closeSnackbar,
                 showDialog,
                 hideDialog,
+                changeTheme,
                 isDialogOpen: state.isDialogOpen,
                 dialogTitle: state.dialogTitle,
                 dialogContent: state.dialogContent,
