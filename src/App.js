@@ -28,15 +28,6 @@ function App() {
     document.body.classList.toggle('darkMode', darkState);
   }, [darkState])
 
-  useEffect(() => {
-    let CurrentDate = new Date();
-    var currentTime = CurrentDate.getHours();
-    if(!currentMode && (currentTime >= 21 || currentTime <= 6)) {
-      setDarkState(!darkState);
-      window.localStorage.setItem("darkMode",  1);
-    }
-  }, [])
-
   return (
     <ThemeProvider theme={darkTheme}>
       <Provider>

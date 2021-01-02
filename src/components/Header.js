@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Typography, makeStyles, AppBar, IconButton, Tooltip} from '@material-ui/core'
 import HideOnScroll from './HideOnScroll';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
@@ -29,6 +29,14 @@ function Header(props) {
         props.handleThemeChange();
         changeTheme();
     }
+
+    useEffect(() => {
+      let CurrentDate = new Date();
+      var currentTime = CurrentDate.getHours();
+      if(!isDarkModeOn && (currentTime >= 21 || currentTime <= 6)) {
+        handleOnClick();
+      }
+    }, [])
 
     return (
         <HideOnScroll {...props}>
