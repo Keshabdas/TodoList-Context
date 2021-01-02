@@ -36,7 +36,7 @@ function Header(props) {
       if(!isDarkModeOn && (currentTime >= 21 || currentTime <= 6)) {
         handleOnClick();
       }
-    }, [])
+    }, [isDarkModeOn])
 
     return (
         <HideOnScroll {...props}>
