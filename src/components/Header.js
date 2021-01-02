@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {Typography, makeStyles, AppBar, IconButton} from '@material-ui/core'
+import {Typography, makeStyles, AppBar, IconButton, Tooltip} from '@material-ui/core'
 import HideOnScroll from './HideOnScroll';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
@@ -37,13 +37,15 @@ function Header(props) {
                     {props.text}
                 </Typography>
                 {props.isMobile ? (
-                    <IconButton className={classes.themeIcon} onClick={() => handleOnClick()}>
-                        {isDarkModeOn ? (
-                            <Brightness7Icon style={{ color: '#fff' }} />
-                        ) : (
-                            <Brightness4Icon style={{ color: '#fff' }} />
-                        )}
-                    </IconButton>
+                    <Tooltip title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
+                        <IconButton className={classes.themeIcon} onClick={() => handleOnClick()}>
+                            {isDarkModeOn ? (
+                                <Brightness7Icon style={{ color: '#fff' }} />
+                            ) : (
+                                <Brightness4Icon style={{ color: '#fff' }} />
+                            )}
+                        </IconButton>
+                    </Tooltip>
                 ) : null}
             </AppBar>
         </HideOnScroll>

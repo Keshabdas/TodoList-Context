@@ -46,7 +46,7 @@ function Provider({children}) {
                 payload: newTask
             });
             openSnackbar('success', 'New Task Added');
-            if (state.todos && state.todos.length < 2) setTimeout(() => openSnackbar('info', 'Double tap/click on a task to mark it Complete or Incomplete'), 5000);
+            // if (state.todos && state.todos.length < 2) setTimeout(() => openSnackbar('info', 'Double tap/click on a task to mark it Complete or Incomplete'), 5000);
         }
     }
 
