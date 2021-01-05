@@ -3,7 +3,7 @@ import { List,  Typography } from '@material-ui/core';
 import TodoItem from './TodoItem';
 import {GlobalContext} from "../context/Provider"
 import Nodata from './Nodata';
-import { SwipeableList, SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
+import { SwipeableList } from '@sandstreamdev/react-swipeable-list';
 import '@sandstreamdev/react-swipeable-list/dist/styles.css';
 
 function IncompletedList(props) {

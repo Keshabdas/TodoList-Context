@@ -33,7 +33,8 @@ function Header(props) {
     useEffect(() => {
       let CurrentDate = new Date();
       var currentTime = CurrentDate.getHours();
-      if(!isDarkModeOn && (currentTime >= 21 || currentTime <= 6)) {
+      let changedModeManually = localStorage.getItem('darkMode');
+      if(changedModeManually === null && (currentTime >= 21 || currentTime <= 6)) {
         handleOnClick();
       }
     }, [])
@@ -44,17 +45,15 @@ function Header(props) {
                 <Typography variant="h4" align="center" className={classes.title}  >
                     {props.text}
                 </Typography>
-                {props.isMobile ? (
-                    <Tooltip title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
-                        <IconButton className={classes.themeIcon} onClick={() => handleOnClick()}>
-                            {isDarkModeOn ? (
-                                <Brightness7Icon style={{ color: '#fff' }} />
-                            ) : (
-                                <Brightness4Icon style={{ color: '#fff' }} />
-                            )}
-                        </IconButton>
-                    </Tooltip>
-                ) : null}
+                <Tooltip title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
+                    <IconButton className={classes.themeIcon} onClick={() => handleOnClick()}>
+                        {isDarkModeOn ? (
+                            <Brightness7Icon style={{ color: '#fff' }} />
+                        ) : (
+                            <Brightness4Icon style={{ color: '#fff' }} />
+                        )}
+                    </IconButton>
+                </Tooltip>
             </AppBar>
         </HideOnScroll>
     )

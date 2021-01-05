@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, withStyles } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@material-ui/core';
 import { GlobalContext } from '../context/Provider';
 
 const CustomDialog = () => {

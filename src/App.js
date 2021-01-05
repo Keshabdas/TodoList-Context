@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import theme from './theme'
 import Provider from './context/Provider';
-import { GlobalContext } from './context/Provider';
 import Mainview from './containers/index'
 import './App.css';
 

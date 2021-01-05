@@ -82,7 +82,7 @@ function Provider({children}) {
 
     const editDone = (id, value, defaultValue) => {
         let currentTodos = [...state.todos];
-        let selectedIndex = currentTodos.findIndex(todo => todo.id == id);
+        let selectedIndex = currentTodos.findIndex(todo => todo.id === id);
         currentTodos[selectedIndex].isEdit = !currentTodos[selectedIndex].isEdit;
         if(value === ''){
             currentTodos[selectedIndex].taskText = defaultValue.trim();

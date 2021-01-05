@@ -1,10 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react'
-import { ListItem, Tooltip, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField } from '@material-ui/core';
+import React, {useContext, useState} from 'react'
+import { ListItem, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField } from '@material-ui/core';
 import {GlobalContext} from "../context/Provider";
 import TodoActions from "./TodoActions";
 import { SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Avatar from '@material-ui/core/Avatar';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DoneIcon from '@material-ui/icons/Done';
 
