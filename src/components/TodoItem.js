@@ -83,17 +83,16 @@ function TodoItem({todo, isMobile, completedList}) {
     return (
         <Paper className={classes.container} elevation={3}>
             <SwipeableListItem
-                swipeLeft={{
+                swipeLeft={todo.isEdit ? null : {
                     content: rightContent,
                     action: () => completedList ? deleteTodo(todo.id) : showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?'),
                 }}
-                swipeRight={{
+                swipeRight={todo.isEdit ? null : {
                     content: leftContent,
                     action: () => onCheckHandler(todo.id)
                 }}
-                // onSwipeProgress={progress => console.info(`Swipe progress: ${progress}%`)}
             >
-                <ListItem  onDoubleClick={() => onCheckHandler(todo.id)} className="listItem">
+                <ListItem  onDoubleClick={() => todo.isEdit ? null : onCheckHandler(todo.id)} className="listItem">
                     {
                         todo.isEdit ? 
                         <TextField id="inputText" color="primary" value={inputValue} onChange={(e) => changeHandler(e)} fullWidth multiline />
