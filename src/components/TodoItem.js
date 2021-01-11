@@ -21,6 +21,13 @@ const styles = makeStyles((theme) => ({
         },
         "& .listItem": {
             backgroundColor: theme.palette.type === 'dark' ?  '#424242' : null,
+            paddingLeft: props => props.isMobile ? 10 : null,
+            paddingTop: props => props.isMobile ? 5 : null,
+            paddingBottom: props => props.isMobile ? 5 : null,
+            "& .MuiListItemText-multiline": {
+                marginTop: props => props.isMobile ? 0 : null,
+                marginBottom: props => props.isMobile ? 0 : null,
+            }
         }
     },
     complete: {
@@ -52,7 +59,7 @@ const styles = makeStyles((theme) => ({
 
 function TodoItem({todo, isMobile, completedList}) {
     const { onCheckHandler, showDialog, deleteTodo } = useContext(GlobalContext); 
-    const classes = styles();
+    const classes = styles({isMobile});
 
     const [inputValue, setInputValue] = useState(todo.taskText);
 
@@ -60,14 +67,15 @@ function TodoItem({todo, isMobile, completedList}) {
         setInputValue(e.target.value);
     }
 
-    const taskDate = todo.createdAt && new Date(todo.createdAt).toDateString();
+    const taskDate = (todo.createdAt && new Date(todo.createdAt).toDateString()) || '';
+    const taskCompletedDate = (todo.completedOn && new Date(todo.completedOn).toDateString()) || taskDate;
 
     const leftContent = (
         <ListItem style={{ background: 'green', height: '100%', color: '#fff' }}>
             <ListItemIcon style={{ minWidth: 20, marginRight: 8 }}>
                 <DoneIcon style={{ color: '#fff' }} />
             </ListItemIcon>
-            <ListItemText primary={completedList ? "Mark incomplete" : "Mark complete"} />
+            <ListItemText primary={completedList ? "Mark Incomplete" : "Mark Complete"} />
         </ListItem>
     );
 
@@ -100,7 +108,7 @@ function TodoItem({todo, isMobile, completedList}) {
                         <ListItemText 
                             multiline='true'
                             primary={todo.taskText}
-                            secondary={taskDate || ''}
+                            secondary={completedList ? `Completed on: ${taskCompletedDate}` : `Created on: ${taskDate}`}
                             className={todo.isComplete ? classes.complete : classes.incomplete}
                             classes={{
                                 primary: classes.primaryTxt,

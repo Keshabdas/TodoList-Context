@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         bottom: 0,
         background: theme.palette.type === 'dark' ? null : '#f3f3f3',
-        padding: '10px 0px',
         '& .MuiBottomNavigationAction-root': {
             maxWidth: 'inherit',
         },
         '& .MuiBottomNavigationAction-root.Mui-selected': {
             color: theme.palette.type === 'dark' ? '#90caf9' : null,
             fontWeight: 600,
+            background: theme.palette.type === 'dark' ? '#00000070' : null,
         }
     },
     appBar: {

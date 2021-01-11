@@ -36,6 +36,7 @@ function Provider({children}) {
         let newTask = {
             id: Date.now(),
             createdAt: Date.now(),
+            completedOn: null,
             taskText: trimmedText,
             isComplete: false,
             isEdit: false,
@@ -63,6 +64,7 @@ function Provider({children}) {
         let selectedIndex = currentTodos.findIndex(todo => todo.id === id);
         currentTodos[selectedIndex].isComplete = !currentTodos[selectedIndex].isComplete;
         currentTodos[selectedIndex].isEdit = false;
+        currentTodos[selectedIndex].completedOn = Date.now();
         dispatch({
             type: "CHECK_HANDLER",
             payload: currentTodos
