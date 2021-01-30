@@ -60,6 +60,31 @@ export default (state, action) => {
                 ...state,
                 isDarkModeOn: action.payload,
             }
+        case "CHANGE_MULTISELECTMODE":
+            return {
+                ...state,
+                isMultiSelectOn: action.payload,
+            }
+        case "ADD_ALL_TO_SELECTED_TODOS":
+            return {
+                ...state,
+                selectedTodos: action.payload,
+            }
+        case "REMOVE_FROM_SELECTED_TODOS":
+            return {
+                ...state,
+                selectedTodos: state.selectedTodos.filter(todo => todo !== action.payload)
+            }   
+        case "ADD_INTO_SELECTED_TODOS":
+            return {
+                ...state,
+                selectedTodos: [...state.selectedTodos, action.payload]
+            }
+        case "CLEAR_SELECTED_TOODS":
+            return {
+                ...state,
+                selectedTodos: action.payload
+            }
         default: 
             return state;
     }

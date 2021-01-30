@@ -1,11 +1,13 @@
 import React, {useContext, useState} from 'react'
-import { ListItem, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField } from '@material-ui/core';
+import { ListItem, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField, IconButton } from '@material-ui/core';
 import {GlobalContext} from "../context/Provider";
 import TodoActions from "./TodoActions";
 import { SwipeableListItem } from '@sandstreamdev/react-swipeable-list';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DoneIcon from '@material-ui/icons/Done';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 const styles = makeStyles((theme) => ({
     container: {
@@ -58,7 +60,7 @@ const styles = makeStyles((theme) => ({
 
 
 function TodoItem({todo, isMobile, completedList}) {
-    const { onCheckHandler, showDialog, deleteTodo } = useContext(GlobalContext); 
+    const { onCheckHandler, showDialog, deleteTodo, isMultiSelectOn, selectedTodos, removeItemFromSelectedTodos, addItemFromSelectedTodos } = useContext(GlobalContext); 
     const classes = styles({isMobile});
 
     const [inputValue, setInputValue] = useState(todo.taskText);
@@ -87,6 +89,18 @@ function TodoItem({todo, isMobile, completedList}) {
             </ListItemIcon>
         </ListItem>
     );
+
+    const multiSelectModeActionIcons = (id) => {
+        if(selectedTodos.includes(id)) {
+            return (<IconButton onClick={() => removeItemFromSelectedTodos(id)}>
+                <CheckCircleIcon color="secondary" />
+            </IconButton>);
+        } else {
+            return (<IconButton onClick={() => addItemFromSelectedTodos(id)}>
+                <RadioButtonUncheckedIcon />
+            </IconButton>);
+        }
+    } 
    
     return (
         <Paper className={classes.container} elevation={3}>
@@ -117,7 +131,7 @@ function TodoItem({todo, isMobile, completedList}) {
                         />
                     }
                     <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
-                        <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />
+                        {isMultiSelectOn ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
                     </ListItemSecondaryAction>
                 </ListItem>
             </SwipeableListItem>

@@ -10,6 +10,8 @@ const initialState = {
     dialogContent: '',
     todoSelected: null,
     isDarkModeOn: Boolean(parseInt(window.localStorage.getItem("darkMode"), 10)) || false,
+    isMultiSelectOn: false,
+    selectedTodos: [],
 }
 
 export const GlobalContext = createContext(initialState);  // Context is defined here
@@ -20,6 +22,7 @@ function Provider({children}) {
     useEffect(() => {
         UpdateLS(state.todos);
     }, [state]);
+    
 
     // state bindings
     const completedList = state.todos.filter(todo => todo.isComplete === true);
@@ -29,6 +32,8 @@ function Provider({children}) {
     const alertMessage = state.alertMessage;
     const todoSelected = state.todoSelected;
     const isDarkModeOn = state.isDarkModeOn;
+    const isMultiSelectOn = state.isMultiSelectOn;
+    const selectedTodos = state.selectedTodos;
 
     // all actions 
     const addTodo = (value) => {
@@ -47,6 +52,7 @@ function Provider({children}) {
                 payload: newTask
             });
             openSnackbar('success', 'New Task Added');
+            if(isMultiSelectOn)handleMultiSelectMode(); // resets the multiselect feature
             // if (state.todos && state.todos.length < 2) setTimeout(() => openSnackbar('info', 'Double tap/click on a task to mark it Complete or Incomplete'), 5000);
         }
     }
@@ -59,6 +65,7 @@ function Provider({children}) {
         openSnackbar('error', 'Task Deleted.')
     }   
 
+    // marks complete or incomplete a task
     const onCheckHandler = (id) => {
         let currentTodos = [...state.todos];
         let selectedIndex = currentTodos.findIndex(todo => todo.id === id);
@@ -136,6 +143,69 @@ function Provider({children}) {
         window.localStorage.setItem("todos", JSON.stringify(Todos));
     }
 
+
+    // MultiSelect functionalities
+
+    const handleMultiSelectMode = () => {
+        dispatch({
+            type: "CHANGE_MULTISELECTMODE",
+            payload: !isMultiSelectOn,
+        });
+        if(isMultiSelectOn) {
+            clearSelectedTodos([])
+        }
+    }
+
+    const handleSelectedTodos = (todos) => {
+        dispatch({
+            type: "ADD_ALL_TO_SELECTED_TODOS",
+            payload: todos,
+        });
+    }
+
+    const removeItemFromSelectedTodos = (id) => {
+        if(selectedTodos.length === 1){
+            handleMultiSelectMode();
+        } else {
+            dispatch({
+                type: "REMOVE_FROM_SELECTED_TODOS",
+                payload: id
+            });
+        }
+    }
+
+    const addItemFromSelectedTodos = (id) => {
+        dispatch({
+            type: "ADD_INTO_SELECTED_TODOS",
+            payload: id
+        });
+    }
+
+    const clearSelectedTodos = (data) => {
+        dispatch({
+            type: "CLEAR_SELECTED_TOODS",
+            payload: data
+        });
+    }
+
+    const deleteAllSelected = () => {
+        let selectedData = [...selectedTodos]
+        if (selectedData.length > 0) {
+            selectedData.forEach((item) => deleteTodo(item))
+            clearSelectedTodos([]);
+            handleMultiSelectMode();
+        }
+    }
+
+    const completeAllSelected = () => {
+        let selectedData = [...selectedTodos]
+        if (selectedData.length > 0) {
+            selectedData.forEach((item) => onCheckHandler(item))
+            clearSelectedTodos([]);
+            handleMultiSelectMode();
+        }
+    }
+
     return (
         <GlobalContext.Provider 
             value={{
@@ -160,6 +230,15 @@ function Provider({children}) {
                 isDialogOpen: state.isDialogOpen,
                 dialogTitle: state.dialogTitle,
                 dialogContent: state.dialogContent,
+                isMultiSelectOn,
+                selectedTodos,
+                handleMultiSelectMode,
+                deleteAllSelected,
+                completeAllSelected,
+                handleSelectedTodos,
+                removeItemFromSelectedTodos,
+                addItemFromSelectedTodos,
+                clearSelectedTodos,
             }}>
                 {children}
         </GlobalContext.Provider>
