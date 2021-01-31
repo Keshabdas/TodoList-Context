@@ -111,11 +111,11 @@ function TodoItem({todo, isMobile, completedList}) {
     return (
         <Paper className={classes.container} elevation={3}>
             <SwipeableListItem
-                swipeLeft={todo.isEdit ? null : {
+                swipeLeft={todo.isEdit || isMultiSelectOn ? null : {
                     content: rightContent,
                     action: () => completedList ? deleteTodo(todo.id) : showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?'),
                 }}
-                swipeRight={todo.isEdit ? null : {
+                swipeRight={todo.isEdit || isMultiSelectOn ? null : {
                     content: leftContent,
                     action: () => onCheckHandler(todo.id)
                 }}
