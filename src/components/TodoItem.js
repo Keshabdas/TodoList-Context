@@ -114,7 +114,7 @@ function TodoItem({todo, isMobile, completedList}) {
                     action: () => onCheckHandler(todo.id)
                 }}
             >
-                <ListItem  onDoubleClick={() => todo.isEdit ? null : onCheckHandler(todo.id)} className="listItem">
+                <ListItem  onDoubleClick={() => todo.isEdit && !isMobile ? null : onCheckHandler(todo.id)} className="listItem">
                     {
                         todo.isEdit ? 
                         <TextField id="inputText" color="primary" value={inputValue} onChange={(e) => changeHandler(e)} fullWidth multiline />
