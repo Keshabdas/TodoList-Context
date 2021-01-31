@@ -100,7 +100,13 @@ function TodoItem({todo, isMobile, completedList}) {
                 <RadioButtonUncheckedIcon />
             </IconButton>);
         }
-    } 
+    }
+
+    const onDoubleClickHandler = () => {
+        if (!todo.isEdit && !isMobile) {
+            onCheckHandler(todo.id)
+        }
+    }
    
     return (
         <Paper className={classes.container} elevation={3}>
@@ -114,7 +120,7 @@ function TodoItem({todo, isMobile, completedList}) {
                     action: () => onCheckHandler(todo.id)
                 }}
             >
-                <ListItem  onDoubleClick={() => todo.isEdit && !isMobile ? null : onCheckHandler(todo.id)} className="listItem">
+                <ListItem  onDoubleClick={() => onDoubleClickHandler()} className="listItem">
                     {
                         todo.isEdit ? 
                         <TextField id="inputText" color="primary" value={inputValue} onChange={(e) => changeHandler(e)} fullWidth multiline />
