@@ -164,7 +164,7 @@ function Provider({children}) {
     }
 
     const removeItemFromSelectedTodos = (id) => {
-        if(selectedTodos.length === 1){
+        if(selectedTodos.length === 1 && isMultiSelectOn){
             handleMultiSelectMode();
         } else {
             dispatch({

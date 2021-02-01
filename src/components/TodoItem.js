@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { ListItem, ListItemText, ListItemSecondaryAction, Paper, makeStyles,TextField, IconButton } from '@material-ui/core';
 import {GlobalContext} from "../context/Provider";
 import TodoActions from "./TodoActions";
@@ -64,10 +64,13 @@ function TodoItem({todo, isMobile, completedList}) {
     const classes = styles({isMobile});
 
     const [inputValue, setInputValue] = useState(todo.taskText);
-
     const changeHandler = (e) => {
         setInputValue(e.target.value);
     }
+
+    useEffect(() => {
+        longPress()
+    }, [])
 
     const taskDate = (todo.createdAt && new Date(todo.createdAt).toDateString()) || '';
     const taskCompletedDate = (todo.completedOn && new Date(todo.completedOn).toDateString()) || taskDate;
@@ -102,6 +105,63 @@ function TodoItem({todo, isMobile, completedList}) {
         }
     }
 
+    const longPress = () => {
+        // The item (or items) to press and hold on
+        let item = document.querySelector(`#todoItem${todo.id}`);
+        let timerID;
+        let counter = 0;
+    
+        let pressHoldEvent = new CustomEvent("pressHold");
+    
+        // Increase or decreae value to adjust how long
+        // one should keep pressing down before the pressHold
+        // event fires
+        let pressHoldDuration = 50;
+    
+        // Listening for the mouse and touch events    
+        // item.addEventListener("mousedown", pressingDown, false);
+        // item.addEventListener("mouseup", notPressingDown, false);
+        // item.addEventListener("mouseleave", notPressingDown, false);
+    
+        item.addEventListener("touchstart", pressingDown, false);
+        item.addEventListener("touchend", notPressingDown, false);
+    
+        // Listening for our custom pressHold event
+        item.addEventListener("pressHold", doSomething, false);
+    
+        function pressingDown(e) {
+          // Start the timer
+          requestAnimationFrame(timer); // resquestAnimationFrame() calls timer function 60 times in a second.
+          e.preventDefault();
+        }
+    
+        function notPressingDown(e) {
+          if(counter > 0){
+              // Stop the timer
+              cancelAnimationFrame(timerID);
+              counter = 0;
+          }  
+        }
+    
+        //
+        // Runs at 60fps when you are pressing down.
+        //
+        function timer() {
+          console.log("Timer tick!");
+    
+          if (counter < pressHoldDuration) {
+            timerID = requestAnimationFrame(timer);
+            counter++;
+          } else {
+            item.dispatchEvent(pressHoldEvent);
+          }
+        }
+    
+        function doSomething(e) {
+            addItemFromSelectedTodos(todo.id)
+        }    
+    }
+
     const onDoubleClickHandler = () => {
         if (!todo.isEdit && !isMobile) {
             onCheckHandler(todo.id)
@@ -109,7 +169,7 @@ function TodoItem({todo, isMobile, completedList}) {
     }
    
     return (
-        <Paper className={classes.container} elevation={3}>
+        <Paper className={classes.container}  elevation={3}>
             <SwipeableListItem
                 swipeLeft={todo.isEdit || isMultiSelectOn ? null : {
                     content: rightContent,
@@ -120,7 +180,7 @@ function TodoItem({todo, isMobile, completedList}) {
                     action: () => onCheckHandler(todo.id)
                 }}
             >
-                <ListItem  onDoubleClick={() => onDoubleClickHandler()} className="listItem">
+                <ListItem id={`todoItem${todo.id}`} onDoubleClick={() => onDoubleClickHandler()} className="listItem">
                     {
                         todo.isEdit ? 
                         <TextField id="inputText" color="primary" value={inputValue} onChange={(e) => changeHandler(e)} fullWidth multiline />
@@ -137,7 +197,7 @@ function TodoItem({todo, isMobile, completedList}) {
                         />
                     }
                     <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
-                        {isMultiSelectOn ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
+                        {isMultiSelectOn || selectedTodos.length > 0 ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
                     </ListItemSecondaryAction>
                 </ListItem>
             </SwipeableListItem>
