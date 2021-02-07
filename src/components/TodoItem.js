@@ -116,7 +116,7 @@ function TodoItem({todo, isMobile, completedList}) {
         // Increase or decreae value to adjust how long
         // one should keep pressing down before the pressHold
         // event fires
-        let pressHoldDuration = 50;
+        let pressHoldDuration = 100;
     
         // Listening for the mouse and touch events    
         // item.addEventListener("mousedown", pressingDown, false);
@@ -132,7 +132,7 @@ function TodoItem({todo, isMobile, completedList}) {
         function pressingDown(e) {
           // Start the timer
           requestAnimationFrame(timer); // resquestAnimationFrame() calls timer function 60 times in a second.
-          e.preventDefault();
+        //   e.preventDefault();
         }
     
         function notPressingDown(e) {

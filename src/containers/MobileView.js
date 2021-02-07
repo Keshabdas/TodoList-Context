@@ -59,7 +59,7 @@ function MobileView(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState('Incomplete');
 
-    const { inCompleteList, completedList, isMultiSelectOn, deleteAllSelected, completeAllSelected} = useContext(GlobalContext);
+    const { inCompleteList, completedList, isMultiSelectOn, deleteAllSelected, completeAllSelected, selectedTodos } = useContext(GlobalContext);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -77,7 +77,7 @@ function MobileView(props) {
     return (
         <>
             <AppBar position="fixed" className={classes.appBar}>
-                {isMultiSelectOn ? (
+                {isMultiSelectOn || selectedTodos.length > 0 ? (
                     <BottomNavigation showLabels onChange={handleChangeOnMultiSelectMode} className={classes.selectedRoot}>
                         <BottomNavigationAction value="Delete" label="Delete" icon={<DeleteIcon color="error" />} />
                         {value === 'Incomplete' ? <BottomNavigationAction label="Complete" value="Mark_complete" icon={<AssignmentTurnedInIcon color='primary' />} /> : null}
