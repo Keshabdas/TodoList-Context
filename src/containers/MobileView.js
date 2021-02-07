@@ -79,8 +79,8 @@ function MobileView(props) {
             <AppBar position="fixed" className={classes.appBar}>
                 {isMultiSelectOn || selectedTodos.length > 0 ? (
                     <BottomNavigation showLabels onChange={handleChangeOnMultiSelectMode} className={classes.selectedRoot}>
-                        <BottomNavigationAction value="Delete" label="Delete" icon={<DeleteIcon color="error" />} />
-                        {value === 'Incomplete' ? <BottomNavigationAction label="Complete" value="Mark_complete" icon={<AssignmentTurnedInIcon color='primary' />} /> : null}
+                        <BottomNavigationAction value="Delete" label="Delete" icon={<Badge color="error" badgeContent={selectedTodos.length}><DeleteIcon color="error" /></Badge>} />
+                        {value === 'Incomplete' ? <BottomNavigationAction label="Complete" value="Mark_complete" icon={<StyledBadge badgeContent={selectedTodos.length}><AssignmentTurnedInIcon color='primary' /></StyledBadge>} /> : null}
                     </BottomNavigation>
                 ) : (
                     <BottomNavigation value={value} showLabels onChange={handleChange} className={classes.root}>
