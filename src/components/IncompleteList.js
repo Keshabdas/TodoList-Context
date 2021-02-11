@@ -9,7 +9,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 function IncompletedList(props) {
-    const {inCompleteList, handleMultiSelectMode, isMultiSelectOn, handleSelectedTodos} = useContext(GlobalContext);
+    const {inCompleteList, handleMultiSelectMode, isMultiSelectOn, handleSelectedTodos, selectedTodos} = useContext(GlobalContext);
 
     const handleSelectAllCheckbox = () => {
         handleMultiSelectMode();
@@ -41,7 +41,7 @@ function IncompletedList(props) {
                                 </Typography>
                                 <div onClick={() => handleSelectAllCheckbox()}>
                                     <IconButton style={{ paddingRight: 0, color: 'blue' }}>
-                                        {isMultiSelectOn ? (
+                                        {isMultiSelectOn || (selectedTodos.length > 0 && selectedTodos.length === inCompleteList.length) ? (
                                             <CheckBoxIcon />
                                         ) : (
                                             <CheckBoxOutlineBlankIcon />
