@@ -37,15 +37,13 @@ function CompletedList(props) {
                                     Select All
                                 </Typography>
                                 <div onClick={() => handleSelectAllCheckbox()}>
-                                    {isMultiSelectOn ? (
-                                    <IconButton>
-                                            <CheckBoxIcon style={{ color: 'blue' }} />
-                                    </IconButton> 
-                                    ) : (
-                                        <IconButton>
-                                            <CheckBoxOutlineBlankIcon style={{ color: 'blue' }} />
-                                        </IconButton>
-                                    )}
+                                    <IconButton style={{ paddingRight: 0, color: 'blue' }}>
+                                        {isMultiSelectOn ? (
+                                            <CheckBoxIcon />
+                                        ) : (
+                                            <CheckBoxOutlineBlankIcon />
+                                        )}
+                                    </IconButton>
                                 </div>
                             </div>
                         ) : null}

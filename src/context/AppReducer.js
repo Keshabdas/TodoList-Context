@@ -73,7 +73,8 @@ export default (state, action) => {
         case "REMOVE_FROM_SELECTED_TODOS":
             return {
                 ...state,
-                selectedTodos: state.selectedTodos.filter(todo => todo !== action.payload)
+                selectedTodos: state.selectedTodos.filter(todo => todo !== action.payload),
+                isMultiSelectOn: false
             }   
         case "ADD_INTO_SELECTED_TODOS":
             return {

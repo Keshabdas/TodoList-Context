@@ -145,12 +145,13 @@ function Provider({children}) {
 
 
     // MultiSelect functionalities
-
     const handleMultiSelectMode = () => {
         dispatch({
             type: "CHANGE_MULTISELECTMODE",
             payload: !isMultiSelectOn,
         });
+
+        // when select all is unselected it clears all the selected todos
         if(isMultiSelectOn) {
             clearSelectedTodos([])
         }
@@ -171,6 +172,7 @@ function Provider({children}) {
                 type: "REMOVE_FROM_SELECTED_TODOS",
                 payload: id
             });
+            // isMultiSelectOn && handleMultiSelectMode();
         }
     }
 
@@ -193,7 +195,7 @@ function Provider({children}) {
         if (selectedData.length > 0) {
             selectedData.forEach((item) => deleteTodo(item))
             clearSelectedTodos([]);
-            handleMultiSelectMode();
+            isMultiSelectOn && handleMultiSelectMode();
         }
     }
 
@@ -202,7 +204,7 @@ function Provider({children}) {
         if (selectedData.length > 0) {
             selectedData.forEach((item) => onCheckHandler(item))
             clearSelectedTodos([]);
-            handleMultiSelectMode();
+            isMultiSelectOn && handleMultiSelectMode();
         }
     }
 

@@ -116,7 +116,7 @@ function TodoItem({todo, isMobile, completedList}) {
         // Increase or decreae value to adjust how long
         // one should keep pressing down before the pressHold
         // event fires
-        let pressHoldDuration = 100;
+        let pressHoldDuration = 70;
     
         // Listening for the mouse and touch events    
         // item.addEventListener("mousedown", pressingDown, false);
@@ -197,7 +197,7 @@ function TodoItem({todo, isMobile, completedList}) {
                         />
                     }
                     <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
-                        {isMultiSelectOn || selectedTodos.length > 0 ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
+                        {selectedTodos.length > 0 || isMultiSelectOn ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
                     </ListItemSecondaryAction>
                 </ListItem>
             </SwipeableListItem>
