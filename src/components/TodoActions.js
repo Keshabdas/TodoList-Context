@@ -4,9 +4,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DoneIcon from '@material-ui/icons/Done';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import {GlobalContext} from "../context/Provider";
 
-const TodoActions = ({todo, inputValue, setInputValue}) => {
+const TodoActions = ({ todo, inputValue, setInputValue, copyToClipBoard }) => {
     const {deleteTodo, editHandler, editDone, showDialog} = useContext(GlobalContext); 
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -94,6 +95,11 @@ const TodoActions = ({todo, inputValue, setInputValue}) => {
                         <MenuItem onClick={handleClose}>
                             <IconButton aria-label='delete' onClick={() => showDialog(todo.id, 'Delete Task', 'Are you sure you want to delete this ?')} color="secondary" size="small">
                                 <DeleteIcon />
+                            </IconButton>
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <IconButton aria-label='copy' onClick={() => copyToClipBoard(todo)} color="#ff9800" size="small">
+                                <FileCopyIcon />
                             </IconButton>
                         </MenuItem>
                     </div>

@@ -60,7 +60,16 @@ const styles = makeStyles((theme) => ({
 
 
 function TodoItem({todo, isMobile, completedList}) {
-    const { onCheckHandler, showDialog, deleteTodo, isMultiSelectOn, selectedTodos, removeItemFromSelectedTodos, addItemFromSelectedTodos } = useContext(GlobalContext); 
+    const { 
+        onCheckHandler, 
+        showDialog, 
+        deleteTodo, 
+        isMultiSelectOn, 
+        selectedTodos, 
+        removeItemFromSelectedTodos, 
+        addItemFromSelectedTodos,
+        openSnackbar,
+    } = useContext(GlobalContext); 
     const classes = styles({isMobile});
 
     const [inputValue, setInputValue] = useState(todo.taskText);
@@ -69,7 +78,7 @@ function TodoItem({todo, isMobile, completedList}) {
     }
 
     useEffect(() => {
-        longPress()
+        longPress();
     }, [])
 
     const taskDate = (todo.createdAt && new Date(todo.createdAt).toDateString()) || '';
@@ -167,6 +176,16 @@ function TodoItem({todo, isMobile, completedList}) {
             onCheckHandler(todo.id)
         }
     }
+
+    function copyToClipBoard(todo) {
+        navigator.clipboard.writeText(`${todo.taskText}`).then(function() {
+            /* clipboard successfully set */
+            openSnackbar('success', 'Copied to Clipboard');
+        }, function() {
+            /* clipboard write failed */
+            openSnackbar('error', 'Failed to copy');
+        });
+    }
    
     return (
         <Paper className={classes.container}  elevation={3}>
@@ -197,7 +216,7 @@ function TodoItem({todo, isMobile, completedList}) {
                         />
                     }
                     <ListItemSecondaryAction classes={{ root: isMobile ? classes.secondaryActionMobile : classes.secondaryAction }}>
-                        {selectedTodos.length > 0 || isMultiSelectOn ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} />}
+                        {selectedTodos.length > 0 || isMultiSelectOn ? multiSelectModeActionIcons(todo.id) : <TodoActions todo={todo} inputValue={inputValue} setInputValue={setInputValue} copyToClipBoard={copyToClipBoard} />}
                     </ListItemSecondaryAction>
                 </ListItem>
             </SwipeableListItem>
