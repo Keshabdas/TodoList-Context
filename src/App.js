@@ -5,7 +5,7 @@ import Mainview from './containers/index'
 import './App.css';
 
 function App() {
-  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  var isMobile = true || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
   return (
     <Provider>
